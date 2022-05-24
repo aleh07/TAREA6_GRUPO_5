@@ -25,6 +25,7 @@ public class PersonaNegocioImpl  implements PersonaNegocio{
 	@Override
 	public boolean delete(Persona persona_a_eliminar) {
 		boolean estado=false;
+		
 		if(persona_a_eliminar.getDni()!=null )//También se puede preguntar si existe ese ID 
 		{
 			estado=pdao.delete(persona_a_eliminar);
