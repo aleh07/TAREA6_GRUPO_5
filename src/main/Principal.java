@@ -13,8 +13,10 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
-					frame.setVisible(true);
+					VentanaPrincipal vista = new VentanaPrincipal();
+					PersonaNegocio negocio = new PersonaNegocioImpl();
+					Controlador controlador = new Controlador(negocio, vista);
+					controlador.inicializar();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -22,7 +24,4 @@ public class Principal {
 		});
 	}
 
-	PersonaNegocio negocio = new PersonaNegocioImpl();
-	//Controlador controlador = new Controlador(vista, negocio);
-	//controlador.;
 }
