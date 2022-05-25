@@ -10,18 +10,10 @@ import presentacion.vista.VentanaPrincipal;
 public class Principal {
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal vista = new VentanaPrincipal();
-					PersonaNegocio negocio = new PersonaNegocioImpl();
-					Controlador controlador = new Controlador(negocio, vista);
-					controlador.inicializar();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+			
+			VentanaPrincipal vista = new VentanaPrincipal();
+			PersonaNegocio negocio = new PersonaNegocioImpl();
+			Controlador controlador = new Controlador(vista,negocio);
+			controlador.inicializar();
+		}
 }

@@ -70,7 +70,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	public List<Persona> readAll()
 	{
 		PreparedStatement statement;
-		ResultSet resultSet;
+		ResultSet resultSet; //Guarda el resultado de la query
 		ArrayList<Persona> personas = new ArrayList<Persona>();
 		Conexion conexion = Conexion.getConexion();
 		try 
