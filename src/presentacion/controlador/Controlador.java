@@ -13,6 +13,7 @@ import presentacion.vista.VentanaListar;
 import presentacion.vista.VentanaModificar;
 import entidad.Persona;
 
+
 public class Controlador  implements ActionListener{
 
 
@@ -44,12 +45,11 @@ public class Controlador  implements ActionListener{
 		this.ventanaPrincipal.getEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
 		this.ventanaPrincipal.getListar().addActionListener(a->EventoClickMenu_AbrirPanel_ListarPersona(a));
 		this.ventanaPrincipal.getModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
-
-		
+	
 		//Eventos PanelVentanaAgregar
 		this.ventanaAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
 		
-		}
+	}
 	
 
 	public void inicializar()
@@ -106,7 +106,7 @@ private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) 
 		String nombre = this.ventanaAgregar.getTxtNombre().getText();
 		String apellido = this.ventanaAgregar.getTxtApellido().getText();
 		String dni = this.ventanaAgregar.getTxtDNI().getText();
-		Persona nuevaPersona = new Persona(nombre, apellido, dni);
+		Persona nuevaPersona = new Persona(dni, nombre, apellido);
 		
 		boolean estado = pNeg.insert(nuevaPersona);
 		String mensaje;
