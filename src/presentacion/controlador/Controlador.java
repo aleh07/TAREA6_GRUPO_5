@@ -2,6 +2,9 @@ package presentacion.controlador;
 
 import java.awt.event.ActionListener;import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import negocio.PersonaNegocio;
 import presentacion.vista.VentanaPrincipal;
 import presentacion.vista.VentanaAgregar;
@@ -42,6 +45,9 @@ public class Controlador  implements ActionListener{
 		this.ventanaPrincipal.getListar().addActionListener(a->EventoClickMenu_AbrirPanel_ListarPersona(a));
 		this.ventanaPrincipal.getModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 
+		
+		//Eventos PanelVentanaAgregar
+		this.ventanaAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
 		
 		}
 	
@@ -95,8 +101,29 @@ public class Controlador  implements ActionListener{
 	}
 	
 		
+private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) {
+		
+		String nombre = this.ventanaAgregar.getTxtNombre().getText();
+		String apellido = this.ventanaAgregar.getTxtApellido().getText();
+		String dni = this.ventanaAgregar.getTxtDNI().getText();
+		Persona nuevaPersona = new Persona(nombre, apellido, dni);
+		
+		boolean estado = pNeg.insert(nuevaPersona);
+		String mensaje;
+		if(estado==true)
+		{
+			mensaje="Persona agregada con exito";
+			this.ventanaAgregar.getTxtNombre().setText("");
+			this.ventanaAgregar.getTxtApellido().setText("");
+			this.ventanaAgregar.getTxtDNI().setText("");
+		}
+		else
+			mensaje="Persona no agregada, complete todos los campos";
+		
+		this.ventanaAgregar.mostrarMensaje(mensaje);
+	
+	}
 	
 	
 	
-
 }
