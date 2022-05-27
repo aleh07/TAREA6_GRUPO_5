@@ -12,15 +12,23 @@ import javax.swing.AbstractButton;
 import javax.swing.JButton;
 
 public class VentanaAgregar extends JPanel {
+	
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDNI;
+	private JButton btnAgregar;
 	
 
 	/**
 	 * Create the panel.
 	 */
+	
 	public VentanaAgregar() {
+		super();
+		initialize();
+	}
+	
+	private void initialize() {
 		setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -50,11 +58,13 @@ public class VentanaAgregar extends JPanel {
 		add(txtDNI);
 		txtDNI.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(93, 219, 89, 23);
-		add(btnAceptar);
+		btnAgregar = new JButton("Aceptar");
+		btnAgregar.setBounds(93, 219, 89, 23);
+		add(btnAgregar);
 
 	}
+	
+	
 
 	public JTextField getTxtNombre() {
 		return txtNombre;
@@ -85,12 +95,13 @@ public class VentanaAgregar extends JPanel {
 		JOptionPane.showMessageDialog(null, mensaje);
 	}
 	
-	public JButton getBtnAgregar() {
+	
+	
+	public JButton getBtnAgregar(){
 		return btnAgregar;
 	}
 
 	
-	private JButton btnAgregar;
 	
 	
 }

@@ -1,6 +1,7 @@
 package negocioImpl;
 
 import java.util.List;
+import javax.swing.JList;
 
 import dao.PersonaDao;
 import daoImpl.PersonaDaoImpl;

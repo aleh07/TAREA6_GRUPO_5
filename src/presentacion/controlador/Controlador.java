@@ -1,6 +1,7 @@
 package presentacion.controlador;
 
-import java.awt.event.ActionListener;import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -14,7 +15,7 @@ import presentacion.vista.VentanaModificar;
 import entidad.Persona;
 
 
-public class Controlador  implements ActionListener{
+public class Controlador implements ActionListener{
 
 
 	
@@ -47,7 +48,11 @@ public class Controlador  implements ActionListener{
 		this.ventanaPrincipal.getModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 	
 		//Eventos PanelVentanaAgregar
-		this.ventanaAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
+				
+			
+			this.ventanaAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
+			
+		
 		
 	}
 	
