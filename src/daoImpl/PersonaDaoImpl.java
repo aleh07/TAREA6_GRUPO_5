@@ -114,7 +114,7 @@ public class PersonaDaoImpl implements PersonaDao {
 			statement.setString(4, personaAnterior.getDni());
 			if(statement.executeUpdate() > 0)
 			{
-				//conexion.commit();
+				conexion.commit();
 				resultado = 1;
 			}
 		}

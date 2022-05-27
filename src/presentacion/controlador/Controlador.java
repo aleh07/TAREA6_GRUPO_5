@@ -89,6 +89,7 @@ public class Controlador implements ActionListener{
 		ventanaPrincipal.getContentPane().add(ventanaListar);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
+		refreshListTable();
 	}
 	
 	public void  EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
@@ -166,9 +167,9 @@ private void refrescarTabla() {
 	this.ventanaModificar.llenarTabla(this.personasEnTabla);
 }
 
-/*private void refreshListTable() {
+private void refreshListTable() {
 	this.personasEnTabla= (ArrayList<Persona>) pNeg.readAll();
 	this.ventanaListar.llenarTabla(this.personasEnTabla);
-}*/
+}
 	
 }
