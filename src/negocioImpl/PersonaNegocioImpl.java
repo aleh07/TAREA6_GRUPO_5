@@ -39,4 +39,16 @@ public class PersonaNegocioImpl  implements PersonaNegocio{
 		return pdao.readAll();
 	}
 
+	@Override
+	public int modificar(Persona personaAnterior, Persona personaNueva) {
+				// >0: correcto
+				// -1: primary key existente
+				// -2: otro error
+				int estado = -2;
+				if(personaNueva.getDni().trim().length()>0 && personaNueva.getNombre().trim().length()>0 && personaNueva.getApellido().trim().length()>0) {
+					estado = pdao.modificar(personaAnterior, personaNueva);
+				}
+				return estado;
+	}
+
 }

@@ -47,11 +47,11 @@ public class Controlador implements ActionListener{
 		this.ventanaPrincipal.getListar().addActionListener(a->EventoClickMenu_AbrirPanel_ListarPersona(a));
 		this.ventanaPrincipal.getModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 	
-		//Eventos PanelVentanaAgregar
-				
-			
+		//Eventos PanelVentanaAgregar			
 			this.ventanaAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
 			
+		//Eventos PanelModificarPersonas
+		this.ventanaModificar.getBtnModificar().addActionListener(a->EventoClickBoton_ModificarPesonas_PanelModificarPersonas(a));
 		
 		
 	}
@@ -98,6 +98,7 @@ public class Controlador implements ActionListener{
 		ventanaPrincipal.getContentPane().add(ventanaModificar);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
+		refrescarTabla();
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -129,6 +130,45 @@ private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) 
 	
 	}
 	
+private void EventoClickBoton_ModificarPesonas_PanelModificarPersonas(ActionEvent a) {
 	
+	String dniNuevo = this.ventanaModificar.getTxtDni().getText();
+	String nombreNuevo = this.ventanaModificar.getTxtNombre().getText();
+	String apellidoNuevo = this.ventanaModificar.getTxtApellido().getText();
+	String dniViejo = this.ventanaModificar.getDniSeleccionado();
+	Persona personaNueva = new Persona(dniNuevo, nombreNuevo, apellidoNuevo);
+	Persona personaVieja = new Persona(dniViejo,"","");
+
+	int estado = pNeg.modificar(personaVieja, personaNueva);
+	String mensaje;
+	switch (estado) {
+		case -1:
+			mensaje="Persona no modificada. El nuevo DNI ya existe.";
+		break;
+		case -2:
+			mensaje="Persona no modificada.";
+		break;
+		default:
+			mensaje="Persona modificada con exito";
+			this.ventanaModificar.getTxtDni().setText("");
+			this.ventanaModificar.getTxtNombre().setText("");
+			this.ventanaModificar.getTxtApellido().setText("");
+		break;
+	}
+	this.ventanaModificar.mostrarMensaje(mensaje);
+	this.refrescarTabla();
+
+}	
+
+private void refrescarTabla() {
+	this.personasEnTabla= (ArrayList<Persona>) pNeg.readAll();
+	this.ventanaModificar.llenarTabla(this.personasEnTabla);
+	this.ventanaModificar.llenarTabla(this.personasEnTabla);
+}
+
+/*private void refreshListTable() {
+	this.personasEnTabla= (ArrayList<Persona>) pNeg.readAll();
+	this.ventanaListar.llenarTabla(this.personasEnTabla);
+}*/
 	
 }

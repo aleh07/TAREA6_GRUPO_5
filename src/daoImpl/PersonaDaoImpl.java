@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import entidad.Persona;
 public class PersonaDaoImpl implements PersonaDao {
 	private static final String insert = "INSERT INTO personas(dni, nombre,apellido) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
+	private static final String modificarPersona = "UPDATE personas SET Dni = ?, Nombre = ? , Apellido = ? WHERE Dni = ? ";
 	private static final String readall = "SELECT * FROM personas";
 		
 	public boolean insert(Persona persona)
@@ -95,5 +97,34 @@ public class PersonaDaoImpl implements PersonaDao {
 		String nombre = resultSet.getString("nombre");
 		String apellido= resultSet.getString("apellido");
 		return new Persona(dni, nombre, apellido);
+	}
+	
+	public int modificar(Persona personaAnterior, Persona personaNueva)
+	{
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		int resultado = -2;
+		try 
+		{
+			//statement = conexion.prepareStatement("UPDATE personas SET Dni="+ personaNueva.getDni() +", Nombre = " + personaNueva.getNombre() + ", Apellido = " + personaNueva.getApellido() + "WHERE Dni = " + personaAnterior.getDni());
+			statement = conexion.prepareStatement(modificarPersona);
+			statement.setString(1, personaNueva.getDni());
+			statement.setString(2, personaNueva.getNombre());
+			statement.setString(3, personaNueva.getApellido());
+			statement.setString(4, personaAnterior.getDni());
+			if(statement.executeUpdate() > 0)
+			{
+				//conexion.commit();
+				resultado = 1;
+			}
+		}
+		catch (SQLException e) 
+		{
+			if(e instanceof SQLIntegrityConstraintViolationException) {
+				resultado = -1;
+			}
+			e.printStackTrace();
+		}
+		return resultado;
 	}
 }
